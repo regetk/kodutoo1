@@ -68,12 +68,7 @@
         
     </target>
     
-<!--
-    <taskdef name="start" classname="org.apache.catalina.ant.StartTask" />
-    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask" />
-    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
-    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
--->
+
     <target name="stop" description="stop application in tomcat">
         <stop url="${tomcat.manager.url}" username="${tomcat.manager.user}"
                       password="${tomcat.manager.password}" path="/${project.name}" />
