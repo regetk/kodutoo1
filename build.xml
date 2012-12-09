@@ -42,59 +42,23 @@
             </manifest>
         </jar>
     </target>
-    
+    <!--
     <target name="runmkdb" depends="package-for-store">
-        <java jar="${store.dir}/makedb.jar" fork="true"></java> <!--fork ???-->
+        <java jar="${store.dir}/makedb.jar" fork="true"></java> 
     </target>
-    
+    -->
     <target name="war" depends="compile">
         <delete file="${build.dir}/${war.file.name}" />
         <war warfile="${build.dir}/${war.file.name}" >
             <classes dir="${classes.dir}" />
             <fileset dir="${web.dir}">
-                <!-- web.xml vaja välja võtta, sest ta on juba webxml atribuudina kaasas -->
-                <!--<exclude name="WEB-INF/web.xml" /> -->
+                
             </fileset>
         </war>
     </target>
     
-    <target name="package-for-store" depends="jar">
-
-        <!-- Change the value of this property to be the name of your JAR,
-             minus the .jar extension. It should not have spaces.
-             <property name="store.jar.name" value="MyJarName"/>
-        -->
-        <property name="store.jar.name" value="makedb"/>
-
-
-        <!-- don't edit below this line -->
-
-        
-        <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>
-
-        <echo message="Packaging  into a single JAR at ${store.jar}"/>
-
-        <delete dir="${store.dir}"/>
-        <mkdir dir="${store.dir}"/>
-
-        <jar destfile="${store.dir}/temp_final.jar" filesetmanifest="skip">
-            <zipgroupfileset dir="${build.dir}" includes="*.jar"/>
-            <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
-
-            <manifest>
-                <attribute name="Main-Class" value="makedb"/>
-            </manifest>
-        </jar>
-
-        <zip destfile="${store.jar}">
-            <zipfileset src="${store.dir}/temp_final.jar"
-            excludes="META-INF/*.SF, META-INF/*.DSA, META-INF/*.RSA"/>
-        </zip>
-
-        <delete file="${store.dir}/temp_final.jar"/>
-
-    </target>
-    <target name="deploy-ant">
+    
+    <target name="deploy-ant" depends="war">
         
         <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"
                  classpath="${tomcat.home}/lib/catalina-ant.jar"/>
@@ -121,11 +85,7 @@
         <classpath refid="project.classpath" />
     </target>
     
-    <target name="deploy" description="Install web application" depends="war">
-        <classpath refid="project.classpath" />
-    <deploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}"
-            path="${project.name}" war="file:${build.dir}${project.name}.war"/>
-    </target>
+    
     
     <target name="undeploy" description="Undeploy web application" depends="war">
     <undeploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}"

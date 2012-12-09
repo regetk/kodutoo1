@@ -4,9 +4,17 @@
         <servlet-name>Hello</servlet-name>
         <servlet-class>Hello</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MkDb</servlet-name>
+        <servlet-class>MkDb</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Hello</servlet-name>
         <url-pattern>/Hello</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MkDb</servlet-name>
+        <url-pattern>/MkDb</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
