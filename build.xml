@@ -94,6 +94,15 @@
         <delete file="${store.dir}/temp_final.jar"/>
 
     </target>
+    <target name="deploy-ant">
+        
+        <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"
+                 classpath="${tomcat.home}/lib/catalina-ant.jar"/>
+        <deploy url="${tomcat.manager.url}" username="${tomcat.manager.user}"
+                password="${tomcat.manager.pass}" path="/${project.name}" 
+                war="file:${build.dir}/${project.name}.war" update="true" />
+        
+    </target>
     
 <!--
     <taskdef name="start" classname="org.apache.catalina.ant.StartTask" />
