@@ -1,71 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<!-- By default, only the Clean and Build commands use this build script. -->
-<!-- Commands such as Run, Debug, and Test only use this build script if -->
-<!-- the Compile on Save feature is turned off for the project. -->
-<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
-<project name="Kodutoo1" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Kodutoo1.</description>
-    <import file="nbproject/build-impl.xml"/>
+<project name="Kodutoo1" basedir=".">
+    <property file="kodutoo1.reget.properties" /> <!-- selle sisu on mõlemal erinev, aga failinimi peaks olema sama -->
+    <property name="project.name" value="${ant.project.name}" />
+    <property name="war.file.name" value="${project.name}.war" />
+    <property name="src.dir" location="src" />
+    <property name="lib.dir" location="lib" />
+    <property name="build.dir" location="build" />
+    <property name="web.dir" location="web" />
+    <property name="web.xml.file" value="${web.dir}/WEB-INF/web.xml" />
+    <property name="classes.dir" location="${build.dir}/classes" />
+    <property name="store.dir" value="store"/>
+
+    <path id="project.classpath">
+        <fileset dir="${lib.dir}" includes="*.jar" />
+        <fileset dir="${tomcat.home}/bin" includes="*.jar" />
+        <fileset dir="${tomcat.home}/lib" includes="*.jar" />
+    </path>
+
+    <target name="init">
+        <mkdir dir="${classes.dir}" />
+    </target>
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
+
+    <target name="copy.non.java.files">  <!-- selleks, et Hibernate mapping failid jms. kätte saada -->
+        <copy todir="${build.dir}" includeemptydirs="false">
+            <fileset dir="${src.dir}" excludes="**/*.java" />
+        </copy>
+    </target>
+
+
+    <target name="compile" depends="clean, init, copy.non.java.files">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="project.classpath" />
+    </target>
+    
+    <target name="jar" depends="compile">
+        <jar destfile="${build.dir}/makedb.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="makedb"></attribute>
+            </manifest>
+        </jar>
+    </target>
     <!--
-
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
-
-      -pre-init:                 called before initialization of project properties 
-      -post-init:                called after initialization of project properties 
-      -pre-compile:              called before javac compilation 
-      -post-compile:             called after javac compilation 
-      -pre-compile-single:       called before javac compilation of single file
-      -post-compile-single:      called after javac compilation of single file
-      -pre-compile-test:         called before javac compilation of JUnit tests
-      -post-compile-test:        called after javac compilation of JUnit tests
-      -pre-compile-test-single:  called before javac compilation of single JUnit test
-      -post-compile-test-single: called after javac compilation of single JUunit test
-      -pre-dist:                 called before archive building 
-      -post-dist:                called after archive building 
-      -post-clean:               called after cleaning build products 
-      -pre-run-deploy:           called before deploying
-      -post-run-deploy:          called after deploying
-
-    Example of pluging an obfuscator after the compilation could look like 
-
-        <target name="-post-compile">
-            <obfuscate>
-                <fileset dir="${build.classes.dir}"/>
-            </obfuscate>
-        </target>
-
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
-
-
-    Other way how to customize the build is by overriding existing main targets.
-    The target of interest are: 
-
-      init-macrodef-javac:    defines macro for javac compilation
-      init-macrodef-junit:   defines macro for junit execution
-      init-macrodef-debug:    defines macro for class debugging
-      do-dist:                archive building
-      run:                    execution of project 
-      javadoc-build:          javadoc generation 
-
-    Example of overriding the target for project execution could look like 
-
-        <target name="run" depends="<PROJNAME>-impl.jar">
-            <exec dir="bin" executable="launcher.exe">
-                <arg file="${dist.jar}"/>
-            </exec>
-        </target>
-
-    Notice that overridden target depends on jar target and not only on 
-    compile target as regular run target does. Again, for list of available 
-    properties which you can use check the target you are overriding in 
-    nbproject/build-impl.xml file. 
-
+    <target name="runmkdb" depends="package-for-store">
+        <java jar="${store.dir}/makedb.jar" fork="true"></java> 
+    </target>
     -->
+    <target name="war" depends="compile">
+        <delete file="${build.dir}/${war.file.name}" />
+        <war warfile="${build.dir}/${war.file.name}" >
+            <classes dir="${classes.dir}" />
+            <fileset dir="${web.dir}">
+                
+            </fileset>
+        </war>
+    </target>
+    
+    
+    <target name="deploy-ant" depends="war">
+        
+        <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"
+                 classpath="${tomcat.home}/lib/catalina-ant.jar"/>
+        <deploy url="${tomcat.manager.url}" username="${tomcat.manager.user}"
+                password="${tomcat.manager.pass}" path="/${project.name}" 
+                war="file:${build.dir}/${project.name}.war" update="true" />
+        
+    </target>
+    
+
+    <target name="stop" description="stop application in tomcat">
+        <stop url="${tomcat.manager.url}" username="${tomcat.manager.user}"
+                      password="${tomcat.manager.password}" path="/${project.name}" />
+    </target>
+
+    <target name="start" description="start application in tomcat">
+        <start url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+                       password="${tomcat.manager.password}" path="/${project.name}" />
+        <classpath refid="project.classpath" />
+    </target>
+    
+    
+    
+    <target name="undeploy" description="Undeploy web application" depends="war">
+    <undeploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}"
+            path="${project.name}" />
+   </target>
+    
 </project>

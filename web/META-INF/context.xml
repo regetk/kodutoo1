@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/Kodutoo1"/>
+<Context antiJARLocking="true" path="/Kodutoo1">
+<Resource name="hsqldb"
+          auth="Container"
+          type="javax.sql.DataSource"
+          driverClassName="org.hsqldb.jdbcDriver"
+          url="jdbc:hsqldb:file:${user.home}/piirivalveDb;shutdown=true"
+          maxActive="20"
+          maxIdle="30"
+          maxWait="-1"
+/>
+</Context>
