@@ -61,7 +61,7 @@
     <target name="deploy-ant" depends="war">
         
         <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"
-                 classpath="${tomcat.home}/lib/catalina-ant.jar"/>
+                 classpathref="project.classpath" />
         <deploy url="${tomcat.manager.url}" username="${tomcat.manager.user}"
                 password="${tomcat.manager.pass}" path="/${project.name}" 
                 war="file:${build.dir}/${project.name}.war" update="true" />
