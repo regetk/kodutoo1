@@ -187,6 +187,7 @@ CREATE INDEX XIF7VOIMALIK_ALLUVUS ON VOIMALIK_ALLUVUS ( voimalik_alluv_liik_ID )
       conn = DriverManager.getConnection("jdbc:hsqldb:file:${user.home}/i377/Team03d/piirivalveDb;shutdown=true");
    stmt = conn.createStatement();
              //sisestame sinna administratiivyksused
+
             stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','mk','maakond','suurim v�imalik administratiiv�ksus Eesti vabariigis, sisaldab linnu ja valdasid',CURRENT_DATE,'9999-12-31')");
             stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','ln','linn','suuruselt teine admin �ksus, sisaldub maakonnas,  Tallinn sisaldab linnaosasid',CURRENT_DATE,'9999-12-31' )");
             stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','v','vald','samuti suuruselt teine admin �ksus, sisaldub maakonnas, v�ib sisaldada ka linna, sisaldab aleveid, alevikke ja k�lasid',CURRENT_DATE,'9999-12-31' )");
