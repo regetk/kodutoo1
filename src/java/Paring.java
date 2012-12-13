@@ -1,15 +1,16 @@
 
 import java.sql.*;
 import java.util.ArrayList;
+import org.apache.commons.dbutils.DbUtils;
 /**
  *
  * @author reget.kalamees
  */
 public class Paring {
    
-    private static String url="jdbc:CUBRID:127.0.0.1:33000:materjalid:::?charset=utf-8";
-    private static String user     = "DBA";
-    private static String pwds = "qwerty";
+    private static String url="jdbc:hsqldb:file:${user.home}/i377/Team03d/piirivalveDb;shutdown=true";
+    private static String user     = "";
+    private static String pwds = "";
      private Object [][] resSet;
         
         
@@ -22,11 +23,12 @@ public class Paring {
     public Object[][] SelectParing(String ps, ArrayList param){
     ResultSet rs=null;
     Connection conn=null;
+    PreparedStatement pLause=null;
         try {//avatakse andmebaasi ühendus
-           conn =DriverManager.getConnection(url, user, pwds);
+           conn =DriverManager.getConnection(url);
            // conn =DriverManager.getConnection(url);
             //valmistatakse ette parameetritega (? märkidega lause)
-          PreparedStatement pLause=conn.prepareStatement(ps,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
+           pLause=conn.prepareStatement(ps,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
           //  PreparedStatement pLause=conn.prepareStatement(ps);
             //parameetrid loetakse listist, tehakse kindlaks nende
             //andmetüüp ja lisatakse ? märkide asemele
@@ -95,13 +97,9 @@ public class Paring {
            System.out.println(ex.getMessage()); 
         }
         finally{
-            try {
-                //kui ühenduse objekt on loodud ja ühendus on lahti
-                //pane see kinni
-                if((conn!=null) && (!conn.isClosed())) conn.close();
-            } catch (SQLException ex) {
-             System.out.println("SQL viga 2 select päringus");
-            }
+         DbUtils.closeQuietly(rs);
+         DbUtils.closeQuietly(pLause);
+         DbUtils.closeQuietly(conn);
         }
     
     
@@ -157,11 +155,10 @@ public class Paring {
     public int DMLParing(String ps, ArrayList param){
     int tulem=-1;
     Connection conn=null;
+    PreparedStatement pLause=null;
         try {
-            conn=DriverManager.getConnection(url,user,this.pwds);
-            
-            
-            PreparedStatement pLause=conn.prepareStatement(ps);
+            conn=DriverManager.getConnection(url);
+            pLause=conn.prepareStatement(ps);
             
             for(int a=0;a<param.size();a++){
                 String kNimi=param.get(a).getClass().toString();
@@ -201,14 +198,11 @@ public class Paring {
            System.out.println("DML päring"+ex.getMessage()); 
         }
         finally{
-            try {
-                //kui ühenduse objekt on loodud ja ühendus on lahti
-                //pane see kinni
-                if((conn!=null) || (!conn.isClosed())) conn.close();
-            } catch (SQLException ex) {
-             System.out.println("SQL viga 2");
-            }
+         
+         DbUtils.closeQuietly(pLause);
+         DbUtils.closeQuietly(conn);
         }
+        
     
     
         

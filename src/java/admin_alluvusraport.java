@@ -12,6 +12,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class admin_alluvusraport extends HttpServlet {
 
+    @Override
+    public void init(){
+        try{
+        Class.forName("org.hsqldb.jdbcDriver");
+            } catch (ClassNotFoundException e){
+    throw new RuntimeException(e);
+   }
+    }
+
+    
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -84,10 +95,10 @@ public class admin_alluvusraport extends HttpServlet {
 
     private void showForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Paring p=new Paring();
-        String sql="SELECT riigi_admin_yksuse_lik_id,nimetus FROM RIIGI_ADMIN_YKSUSE_LIIK ";
-Object tulem[][]=p.SelectParing(sql, new ArrayList());
-Object tulemus[]={"Kihelkond","Vald","Linn","Maakond"};
-request.setAttribute("formData", tulemus);
+        String sql="SELECT riigi_admin_yksuse_lik_id,nimetus FROM RIIGI_ADMIN_YKSUSE_LIIK";
+        Object tulem[][]=p.SelectParing(sql, new ArrayList());
+//Object tulemus[]={"Kihelkond","Vald","Linn","Maakond"};
+request.setAttribute("formData", tulem);
 request.getRequestDispatcher("admin_alluvusraport.jsp").forward(request, response);
 
     }

@@ -22,12 +22,19 @@
                             <%
                             Object items=request.getAttribute("formData");
                             //String [] arr=(String[])items;
-                            Object obs[]=(Object[])items;
-                            out.println("Tere"+obs[0].toString());
+                            Object read[]=(Object[])items;
+                            out.print(items);
+                            /*
+                            for(int a=0;a<obs.length;a++){
+                                String tt=obs[a][0].toString();
+                                String it=obs[a][1].toString();
+                                out.println("<option value='"+it+"'>"+tt+"</option>");
+                             }
+                            * */
                             %>
-                            <c:forEach var="liik" items="${obs}">
-                                <option value='<c:out value="${liik}"></c:out>'>uu</option>
-                            </c:forEach>
+                            
+                                <option value=''>uu</option>
+                           
                         </select>
                     </td>
                     <td>

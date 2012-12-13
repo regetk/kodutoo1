@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Kodutoo1" basedir=".">
-    <property file="kodutoo1.reget.properties" /> <!-- selle sisu on mõlemal erinev, aga failinimi peaks olema sama -->
+    
     <property name="project.name" value="${ant.project.name}" />
     <property name="war.file.name" value="${project.name}.war" />
     <property name="src.dir" location="src" />
@@ -13,8 +13,10 @@
 
     <path id="project.classpath">
         <fileset dir="${lib.dir}" includes="*.jar" />
+        <!--
         <fileset dir="${tomcat.home}/bin" includes="*.jar" />
         <fileset dir="${tomcat.home}/lib" includes="*.jar" />
+        -->
     </path>
 
     <target name="init">
@@ -59,9 +61,16 @@
     
     
     <target name="deploy-ant" depends="war">
+        <path id="project.classpath.dep">
+        <fileset dir="${lib.dir}" includes="*.jar" />
         
+        <fileset dir="${tomcat.home}/bin" includes="*.jar" />
+        <fileset dir="${tomcat.home}/lib" includes="*.jar" />
+        
+    </path>
+        <property file="kodutoo1.reget.properties" /> <!-- selle sisu on mõlemal erinev, aga failinimi peaks olema sama -->
         <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"
-                 classpathref="project.classpath" />
+                 classpathref="project.classpath.dep" />
         <deploy url="${tomcat.manager.url}" username="${tomcat.manager.user}"
                 password="${tomcat.manager.pass}" path="/${project.name}" 
                 war="file:${build.dir}/${project.name}.war" update="true" />
