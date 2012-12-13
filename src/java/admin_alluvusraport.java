@@ -94,10 +94,15 @@ public class admin_alluvusraport extends HttpServlet {
     }// </editor-fold>
 
     private void showForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String kuupaev=request.getParameter("kuupaev");
+        if(kuupaev==null){
+        //siis tänane kp
+        }
         Paring p=new Paring();
         String sql="SELECT riigi_admin_yksuse_lik_id,nimetus FROM RIIGI_ADMIN_YKSUSE_LIIK";
         Object tulem[][]=p.SelectParing(sql, new ArrayList());
-//Object tulemus[]={"Kihelkond","Vald","Linn","Maakond"};
+        //SQL alluvus
+        
 request.setAttribute("formData", tulem);
 request.getRequestDispatcher("admin_alluvusraport.jsp").forward(request, response);
 

@@ -21,16 +21,18 @@
                         <select name="ayLiik">
                             <%
                             Object items=request.getAttribute("formData");
+                            if(items!=null){
                             //String [] arr=(String[])items;
-                            Object read[]=(Object[])items;
-                            out.print(items);
-                            /*
+                            Object obs[][]=(Object[][])items;
+                            //out.print(items);
+                           
                             for(int a=0;a<obs.length;a++){
                                 String tt=obs[a][0].toString();
                                 String it=obs[a][1].toString();
-                                out.println("<option value='"+it+"'>"+tt+"</option>");
+                                out.println("<option value='"+tt+"'>"+it+"</option>");
                              }
-                            * */
+                           
+                           }
                             %>
                             
                                 <option value=''>uu</option>
