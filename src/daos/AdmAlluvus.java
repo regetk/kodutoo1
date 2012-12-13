@@ -4,13 +4,14 @@
  */
 package daos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author dell
  */
-public class VoimalikAlluvus {
-
-    private int ylem_id;
+public class AdmAlluvus  implements Serializable {
+     private int ylem_id;
     private int alam_id;
     private String avaja;
     private String avatud;
@@ -19,15 +20,15 @@ public class VoimalikAlluvus {
     private String sulgeja;
     private String suletud;
 
-    public VoimalikAlluvus() {
+    public AdmAlluvus() {
     }
 
-    public VoimalikAlluvus(int yl_id, int al_id) {
+    public AdmAlluvus(int yl_id, int al_id) {
         this.ylem_id = yl_id;
         this.alam_id = al_id;
     }
 
-    public VoimalikAlluvus(int yl_id, int al_id, String avaja, String avatud, String muutja, String muudetud, String sulgeja, String suletud) {
+    public AdmAlluvus(int yl_id, int al_id, String avaja, String avatud, String muutja, String muudetud, String sulgeja, String suletud) {
         this.ylem_id = yl_id;
         this.alam_id = al_id;
         this.avaja = avaja;
@@ -158,3 +159,6 @@ public class VoimalikAlluvus {
         return both;
     }
 }
+
+    
+

@@ -4,65 +4,111 @@
  */
 package daos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author dell
  */
-public class AdmAlluvus {
-     private int ylem_id;
-    private int alam_id;
+public class AdmYksus  implements Serializable{
+
+    private int id;
+    private String kood;
+    private String nimetus;
+    private String kommentaar;
     private String avaja;
     private String avatud;
     private String muutja;
     private String muudetud;
     private String sulgeja;
     private String suletud;
+    private int fk;
 
-    public AdmAlluvus() {
+    public AdmYksus() {
     }
 
-    public AdmAlluvus(int yl_id, int al_id) {
-        this.ylem_id = yl_id;
-        this.alam_id = al_id;
+    public AdmYksus(String kood, String nimetus, String kommentaar) {
+        this.kood = kood;
+        this.nimetus = nimetus;
+        this.kommentaar = kommentaar;
     }
 
-    public AdmAlluvus(int yl_id, int al_id, String avaja, String avatud, String muutja, String muudetud, String sulgeja, String suletud) {
-        this.ylem_id = yl_id;
-        this.alam_id = al_id;
+    public AdmYksus(int id, String kood, String nimetus, String kommentaar, int fk) {
+        this.id = id;
+        this.kood = kood;
+        this.nimetus = nimetus;
+        this.kommentaar = kommentaar;
+        this.fk = fk;
+    }
+
+    public AdmYksus(int id, String kood, String nimetus, String kommentaar, String avaja, String avatud, String muutja, String muudetud, String sulgeja, String suletud, int fk) {
+        this.id = id;
+        this.kood = kood;
+        this.nimetus = nimetus;
+        this.kommentaar = kommentaar;
         this.avaja = avaja;
         this.avatud = avatud;
         this.muutja = muutja;
         this.muudetud = muudetud;
         this.sulgeja = sulgeja;
         this.suletud = suletud;
+        this.fk = fk;
     }
 
     /**
-     * @return the ylem_id
+     * @return the id
      */
-    public int getYlem_id() {
-        return ylem_id;
+    public int getId() {
+        return id;
     }
 
     /**
-     * @param ylem_id the ylem_id to set
+     * @param id the id to set
      */
-    public void setYlem_id(int ylem_id) {
-        this.ylem_id = ylem_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
-     * @return the alam_id
+     * @return the kood
      */
-    public int getAlam_id() {
-        return alam_id;
+    public String getKood() {
+        return kood;
     }
 
     /**
-     * @param alam_id the alam_id to set
+     * @param kood the kood to set
      */
-    public void setAlam_id(int alam_id) {
-        this.alam_id = alam_id;
+    public void setKood(String kood) {
+        this.kood = kood;
+    }
+
+    /**
+     * @return the nimetus
+     */
+    public String getNimetus() {
+        return nimetus;
+    }
+
+    /**
+     * @param nimetus the nimetus to set
+     */
+    public void setNimetus(String nimetus) {
+        this.nimetus = nimetus;
+    }
+
+    /**
+     * @return the kommentaar
+     */
+    public String getKommentaar() {
+        return kommentaar;
+    }
+
+    /**
+     * @param kommentaar the kommentaar to set
+     */
+    public void setKommentaar(String kommentaar) {
+        this.kommentaar = kommentaar;
     }
 
     /**
@@ -149,14 +195,22 @@ public class AdmAlluvus {
         this.suletud = suletud;
     }
 
-    @Override
-    public String toString() {
-
-        String both = String.valueOf(ylem_id) + "," + String.valueOf(alam_id);
-
-        return both;
+    /**
+     * @return the fk
+     */
+    public int getFk() {
+        return fk;
     }
-}
 
+    /**
+     * @param fk the fk to set
+     */
+    public void setFk(int fk) {
+        this.fk = fk;
+    }
     
-
+      @Override
+	public String toString() {
+	return  nimetus ;
+	}  
+}
