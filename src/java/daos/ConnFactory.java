@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class ConnFactory {
 
     String driverClassName = "org.hsqldb.jdbcDriver";
-    String connectionUrl = "jdbc:hsqldb:file:${user.home}/Team03d/piirivalveDb;shutdown=true";
+    String connectionUrl = "jdbc:hsqldb:file:${user.home}i377/Team03d/piirivalveDb;shutdown=true";
 //	String dbUser = "root";
 //	String dbPwd = "root";
     private static ConnFactory ConnFactory = null;
