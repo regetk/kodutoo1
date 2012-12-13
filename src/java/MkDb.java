@@ -180,25 +180,26 @@ CREATE INDEX XIF7VOIMALIK_ALLUVUS ON VOIMALIK_ALLUVUS ( voimalik_alluv_liik_ID )
    stmt = conn.createStatement();
              //sisestame sinna administratiivyksused
             stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','mk','maakond','suurim v�imalik administratiiv�ksus Eesti vabariigis, sisaldab linnu ja valdasid',CURRENT_DATE,'9999-12-31')");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'ln','linn','suuruselt teine admin �ksus, sisaldub maakonnas,  Tallinn sisaldab linnaosasid','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'v','vald','samuti suuruselt teine admin �ksus, sisaldub maakonnas, v�ib sisaldada ka linna, sisaldab aleveid, alevikke ja k�lasid','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'a','alev','sisaldub vallas','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','ln','linn','suuruselt teine admin �ksus, sisaldub maakonnas,  Tallinn sisaldab linnaosasid',CURRENT_DATE,'9999-12-31' )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','v','vald','samuti suuruselt teine admin �ksus, sisaldub maakonnas, v�ib sisaldada ka linna, sisaldab aleveid, alevikke ja k�lasid',CURRENT_DATE,'9999-12-31' )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUSE_LIIK  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','a','alev','sisaldub vallas',CURRENT_DATE,'9999-12-31' )");
 
-            
+            /*
             stmt.executeUpdate(" INSERT INTO VOIMALIK_ALLUVUS  VALUES (1,2,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
             stmt.executeUpdate(" INSERT INTO VOIMALIK_ALLUVUS  VALUES (1,3,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
-   //lisame andmed
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'V145','Leisi vald','asub Saare mk-s','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',3 )");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES (null, 'V146','Orissaare vald','asub Saare mk-s','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',3 )");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'Mk100','Harju maakond','suurima rahvastikutihedusega','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',1)");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'Mk123','Saare maakond','asub Saare mk-s','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',1 )");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'L234','Kuressaare linn','asub Saare mk-s','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',2 )");
-            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES (null, 'A456','Orissaare alev','asub Saare mk-s, Orissaare vallas','An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',4 )");
+            */
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','V145','Leisi vald','asub Saare mk-s','2000-01-01','9999-12-31',3 )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31', 'V146','Orissaare vald','asub Saare mk-s','2000-01-01','9999-12-31',3 )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','Mk100','Harju maakond','suurima rahvastikutihedusega','2000-01-01','9999-12-31',1)");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','Mk123','Saare maakond','asub Saare mk-s','2000-01-01','9999-12-31',1 )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES ( null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','L234','Kuressaare linn','asub Saare mk-s','2000-01-01','9999-12-31',2 )");
+            stmt.executeUpdate(" INSERT INTO RIIGI_ADMIN_YKSUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31', 'A456','Orissaare alev','asub Saare mk-s, Orissaare vallas','2000-01-01','9999-12-31',4 )");
+            
 
          //lisame andmed
-            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (1,1,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' );");
-            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (4,5,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
-            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (2,6,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' )");
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','eilsest','ülehomsega','komm',4,1 );");
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' ,'eilsest','ülehomsega','komm',4,2)");
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','eilsest','ülehomsega','no komm',2,6 )");
 
   
  

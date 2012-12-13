@@ -1,17 +1,5 @@
-<%-- 
-    Document   : admin_alluvusraport
-    Created on : Dec 8, 2012, 9:16:11 PM
-    Author     : dell
---%>
-
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%
-Paring p=new Paring();
-String sql="SELECT RIIGI_ADMIN_YKSUSE_LIIK_ID, FROM RIIGI_ADMIN_YKSUSE_LIIK ";
-Object tulemus[][]=p.SelectParing(sql, new ArrayList());
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,10 +18,20 @@ Object tulemus[][]=p.SelectParing(sql, new ArrayList());
                 <tr>
                   <td><input type="date" name="kuupaev" /></td>
                     <td>
-                      
+                        <select name="ayLiik">
+                            <%
+                            Object items=request.getAttribute("formData");
+                            //String [] arr=(String[])items;
+                            Object obs[]=(Object[])items;
+                            out.println("Tere"+obs[0].toString());
+                            %>
+                            <c:forEach var="liik" items="${obs}">
+                                <option value='<c:out value="${liik}"></c:out>'>uu</option>
+                            </c:forEach>
+                        </select>
                     </td>
                     <td>
-                        
+                        <input type="submit" value="Värskenda" />  
                     </td>  
                     
                 </tr>
