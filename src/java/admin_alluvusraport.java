@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -94,16 +97,37 @@ public class admin_alluvusraport extends HttpServlet {
     }// </editor-fold>
 
     private void showForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+       //GET parameetrite lugemine
         String kuupaev=request.getParameter("kuupaev");
+        String ayLiik=request.getParameter("ayLiik");
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dKp=new Date();
         if(kuupaev==null){
-        //siis tänane kp
+            kuupaev=dateFormat.format(dKp);
         }
+        if(ayLiik==null){
+            ayLiik="1";
+        }
+        int iAyLiik=Integer.parseInt(ayLiik);
+        
+        //üksuste liikide päring
         Paring p=new Paring();
         String sql="SELECT riigi_admin_yksuse_lik_id,nimetus FROM RIIGI_ADMIN_YKSUSE_LIIK";
         Object tulem[][]=p.SelectParing(sql, new ArrayList());
         //SQL alluvus
+        request.setAttribute("formData", tulem);
         
-request.setAttribute("formData", tulem);
+        //üksuste nimede päring
+        ArrayList al=new ArrayList();
+        al.add(iAyLiik);
+        sql="select nimetus from riigi_admin_yksus where riigi_admin_yksuse_lik_id=?";
+        Object ayd[][]=p.SelectParing(sql, al);
+        request.setAttribute("yksused", ayd);
+        
+        //üksuste alluvate päring
+        
+        
 request.getRequestDispatcher("admin_alluvusraport.jsp").forward(request, response);
 
     }

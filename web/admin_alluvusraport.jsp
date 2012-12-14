@@ -35,8 +35,7 @@
                            }
                             %>
                             
-                                <option value=''>uu</option>
-                           
+                                                          
                         </select>
                     </td>
                     <td>
@@ -45,7 +44,25 @@
                     
                 </tr>
             </table>
-            
+            <%
+                            Object nimed=request.getAttribute("yksused");
+                            if(nimed!=null){
+                            //String [] arr=(String[])items;
+                            Object obs[][]=(Object[][])nimed;
+                            //out.print(items);
+                           
+                            for(int a=0;a<obs.length;a++){
+                                String tt=obs[a][0].toString();
+                                //String it=obs[a][1].toString();
+                                out.println("<table><tr><td>"+tt+"</td></tr></table>");
+                             }
+                           
+                           }
+                            %>
+                            <table>
+                                
+                                
+                            </table>
             
             
         </form>

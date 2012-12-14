@@ -1,10 +1,10 @@
-
 import java.sql.*;
 import java.util.ArrayList;
 import org.apache.commons.dbutils.DbUtils;
 /**
  *
  * @author reget.kalamees
+ * NB!!! kasutatavad ainult meetodid SelectParing ja DMLParing !!!
  */
 public class Paring {
    

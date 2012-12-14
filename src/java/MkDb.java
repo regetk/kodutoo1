@@ -206,10 +206,11 @@ CREATE INDEX XIF7VOIMALIK_ALLUVUS ON VOIMALIK_ALLUVUS ( voimalik_alluv_liik_ID )
             
 
          //lisame andmed
-            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','eilsest','ülehomsega','komm',4,1 );");
-            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' ,'eilsest','ülehomsega','komm',4,2)");
-            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','eilsest','ülehomsega','no komm',2,6 )");
-
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','2001-01-01','2005-02-20','komm',4,1 );");
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31' ,'1900-01-01','9999-12-31','komm',4,2)");
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','1900-01-01','9999-12-31','no komm',2,6 )");
+            //Leisi vald liikus Saare mk koosseisust Harju mk koossseisu
+            stmt.executeUpdate(" INSERT INTO ADMIN_ALLUVUS VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31','2005-02-20','9999-12-32','komm',3,1 );");
   
  
   } 
