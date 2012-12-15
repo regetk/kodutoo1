@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dell
+ * @author anneli
  */
 public class adm_liigi_redaktor extends HttpServlet {
 
@@ -113,7 +113,9 @@ public class adm_liigi_redaktor extends HttpServlet {
         p.DMLParing(sql, params);
         
         //lisame nyyd VOIMALIK_Alluvus
-       
+        int ylem_ID_nr = Integer.parseInt(ylem_id);
+        
+        if(ylem_ID_nr!=0){
         //asume hankima viimati sisestatud ay liigi ID-d
         ArrayList param2=new ArrayList();
         param2.add(kood);
@@ -127,6 +129,7 @@ public class adm_liigi_redaktor extends HttpServlet {
          param3.add(alluv_id);
          String sql3 = "INSERT INTO VOIMALIK_ALLUVUS  VALUES (null,'An4', CURRENT_DATE,'Nobody','9999-12-31', NULL,'9999-12-31',?,?,'komm')";
          p.DMLParing(sql3, param3);
+        }
          showForm(request, response);
     }
 
@@ -147,34 +150,33 @@ public class adm_liigi_redaktor extends HttpServlet {
         Paring p = new Paring();
         String sql = "SELECT riigi_admin_yksuse_lik_id,nimetus FROM RIIGI_ADMIN_YKSUSE_LIIK";
         Object tulem[][] = p.SelectParing(sql, new ArrayList());
-        request.setAttribute("vormiAndmed", tulem);
-        //SQL alluvus
-
-       
-       
         
         
-        String sql2 = "SELECT NIMETUS FROM RIIGI_ADMIN_YKSUSE_LIIK RIIGI_ADMIN_YKSUSE_LIIK WHERE RIIGI_ADMIN_YKSUSE_LIK_ID NOT IN (SELECT VOIMALIK_ALLUV_LIIK_ID FROM VOIMALIK_ALLUVUS";
+        //potentsiaalsed alluvad, kellel veel ylemust ei ole      
         
+        String sql2 = "SELECT riigi_admin_yksuse_lik_id,NIMETUS FROM PUBLIC.RIIGI_ADMIN_YKSUSE_LIIK RIIGI_ADMIN_YKSUSE_LIIK WHERE RIIGI_ADMIN_YKSUSE_LIK_ID NOT IN (SELECT VOIMALIK_ALLUV_LIIK_ID FROM PUBLIC.VOIMALIK_ALLUVUS)";
+        Object tulem2[][] = p.SelectParing(sql2, new ArrayList());
+          
+        
+        request.setAttribute("vormiAndmed", tulem); 
+        request.setAttribute("allumatud", tulem2);
         request.getRequestDispatcher("adm_liigi_redaktor.jsp").forward(request, response);
+        
     } 
 
-    //meetod andmete Ãµigsuse kontrolliks ja teated, kui miskit on valesti
+    //meetod andmete õigsuse kontrolliks ja teated, kui miskit on valesti
     private List<String> getValidationErrors(HttpServletRequest request) {
-        List<String> errors = new ArrayList<String>();
+        List<String> errors = new ArrayList<>();
         if ("".equals(request.getParameter("ay_liik_kood"))) {
             errors.add("Sisesta alluvusyksuse liigi kood!");
         }
         if ("".equals(request.getParameter("ay_liik_nimi"))) {
             errors.add("Sisesta alluvusyksuse liigi nimi!");
-        }
-        
+        }     
             if ("".equals(request.getParameter("ay_liik_komm"))) {
             errors.add("Sisesta alluvusyksuse liigi kommentaar!");
         }
-                if ("".equals(request.getParameter("ay_liik_nimi"))) {
-            errors.add("Sisesta alluvusyksuse liigi nimi!");
-        }
+                
 
         return errors;
     }
