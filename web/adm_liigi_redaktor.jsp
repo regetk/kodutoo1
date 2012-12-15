@@ -33,7 +33,8 @@
                     Kommentaar: <br/>
                     <textarea name='ay_liik_komm' id='textAreaId'>Kommentaar 
                     </textarea><br/>
-                    Allub: <select name="ay_liik_ylemus"
+                    Allub: <select name="ay_liik_ylemus">
+                                <option value='0'></option>
                                    <%
                                        Object items = request.getAttribute("vormiAndmed");
                                        if (items != null) {
@@ -48,14 +49,32 @@
                                            }
                                        }
                                    %>
-                                   <option value=''>uu</option>
+                                   
                     </select>
                     <br/>
 
                 </td>
-                <td valign="top" bgcolor=""silver">Alluvad<br/>
-                    <input type=TEXT name="muutuja_allujate_kollektsioonist" value="Allujate_kollekts_isend" > <!-- <//%=textFields[j]%>  -->
-                    <input type="submit" name="save_ad_liik" value="Eemalda">
+                <td valign="top" bgcolor="silver">Alluvad<br/>
+                    <select name="ay_liik_alluv">
+                         
+                                   <%
+                                       Object items2 = request.getAttribute("allumatud");
+                                      
+                                       if (items2 != null) {
+                                        
+                                           Object obs2[][] = (Object[][]) items2;
+                                           //out.print(items);
+
+                                           for (int a = 0; a < obs2.length; a++) {
+                                               String tt = obs2[a][0].toString();
+                                               String it = obs2[a][1].toString();
+                                               out.println("<option value='" + tt + "'>" + it + "</option>");
+                                           }
+                                       }
+                                   %>
+                                  
+                    </select>
+           <input type="submit" name="save_ad_liik" value="Lisa">
                    
                 </td>
 
