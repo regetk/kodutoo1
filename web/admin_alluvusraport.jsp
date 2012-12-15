@@ -16,20 +16,30 @@
                     <td></td>
                 </tr>
                 <tr>
-                  <td><input type="date" name="kuupaev" /></td>
+                  <td><input type="date" name="kuupaev" value="<%= request.getAttribute("kuupaev")%>" /></td>
                     <td>
                         <select name="ayLiik">
                             <%
-                            Object items=request.getAttribute("formData");
+                            Object items=request.getAttribute("yLiik");
+                            String vYksus=(String)request.getAttribute("vYksus");
+                            int valitudYksus=0;
+                            if(vYksus!=null){
+                            valitudYksus=Integer.parseInt(vYksus);
+                            }
                             if(items!=null){
-                            //String [] arr=(String[])items;
-                            Object obs[][]=(Object[][])items;
-                            //out.print(items);
+                             Object obs[][]=(Object[][])items;
+                          //  out.println(valitudYksus);
                            
                             for(int a=0;a<obs.length;a++){
                                 String tt=obs[a][0].toString();
                                 String it=obs[a][1].toString();
-                                out.println("<option value='"+tt+"'>"+it+"</option>");
+                                //sest andmebaasis algavad id-d 1-st
+                                if((valitudYksus-1)==a){
+                                  out.println("<option selected value='"+tt+"'>"+it+"</option>");   
+                                }else{
+                                 out.println("<option value='"+tt+"'>"+it+"</option>");   
+                                }
+                                
                              }
                            
                            }
@@ -47,16 +57,11 @@
             <%
                             Object nimed=request.getAttribute("yksused");
                             if(nimed!=null){
-                            //String [] arr=(String[])items;
                             Object obs[][]=(Object[][])nimed;
-                            //out.print(items);
-                           
                             for(int a=0;a<obs.length;a++){
                                 String tt=obs[a][0].toString();
-                                //String it=obs[a][1].toString();
-                                out.println("<table><tr><td>"+tt+"</td></tr></table>");
+                                out.println("<table><tr><td>"+tt+"</td>" + "<td><input type='submit' name='nupp"+ a + "'></td></tr></table>");
                              }
-                           
                            }
                             %>
                             <table>

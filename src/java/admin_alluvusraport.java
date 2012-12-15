@@ -103,6 +103,7 @@ public class admin_alluvusraport extends HttpServlet {
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dKp=new Date();
+        //kui pole määratud pannakse praegune kuupäev ja valitakse listist esimene
         if(kuupaev==null){
             kuupaev=dateFormat.format(dKp);
         }
@@ -110,13 +111,16 @@ public class admin_alluvusraport extends HttpServlet {
             ayLiik="1";
         }
         int iAyLiik=Integer.parseInt(ayLiik);
+        //saada parameetrid JSP lehele tagasi kah
+        request.setAttribute("kuupaev", kuupaev);
+        request.setAttribute("vYksus", ayLiik);
         
         //üksuste liikide päring
         Paring p=new Paring();
         String sql="SELECT riigi_admin_yksuse_lik_id,nimetus FROM RIIGI_ADMIN_YKSUSE_LIIK";
         Object tulem[][]=p.SelectParing(sql, new ArrayList());
         //SQL alluvus
-        request.setAttribute("formData", tulem);
+        request.setAttribute("yLiik", tulem);
         
         //üksuste nimede päring
         ArrayList al=new ArrayList();
