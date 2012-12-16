@@ -1,8 +1,11 @@
+package kt1;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import kt1.Paring;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
