@@ -1,6 +1,9 @@
+package kt1;
+
 /**
  *
  * @author reget.kalamees
+ * otse materjalidest 
  */
 public class TableRow {
 

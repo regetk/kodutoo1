@@ -6,15 +6,15 @@
     </servlet>
     <servlet>
         <servlet-name>MkDb</servlet-name>
-        <servlet-class>MkDb</servlet-class>
+        <servlet-class>kt1.MkDb</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>admin_alluvusraport</servlet-name>
-        <servlet-class>admin_alluvusraport</servlet-class>
+        <servlet-class>kt1.admin_alluvusraport</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>adm_liigi_redaktor</servlet-name>
-        <servlet-class>adm_liigi_redaktor</servlet-class>
+        <servlet-class>kt1.adm_liigi_redaktor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Hello</servlet-name>
@@ -28,7 +28,7 @@
         <servlet-name>admin_alluvusraport</servlet-name>
         <url-pattern>/admin_alluvusraport</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>adm_liigi_redaktor</servlet-name>
         <url-pattern>/adm_liigi_redaktor</url-pattern>
     </servlet-mapping>

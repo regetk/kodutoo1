@@ -1,3 +1,5 @@
+package kt1;
+
 import java.sql.*;
 import java.util.ArrayList;
 import org.apache.commons.dbutils.DbUtils;
@@ -11,7 +13,7 @@ public class Paring {
     private static String url="jdbc:hsqldb:file:${user.home}/i377/Team03d/piirivalveDb;shutdown=true";
     private static String user     = "";
     private static String pwds = "";
-     private Object [][] resSet;
+     private Object [][] resSet=null;
         
         
        // 
@@ -20,7 +22,13 @@ public class Paring {
     
     }
     
+    /*
+     * @return kui päring saab mingi tulemuse, tagastatakse 2-mõõtmeline objekti massiiv
+     *  vastasel juhul null
+     */
+    
     public Object[][] SelectParing(String ps, ArrayList param){
+    this.resSet=null;
     ResultSet rs=null;
     Connection conn=null;
     PreparedStatement pLause=null;
@@ -74,6 +82,7 @@ public class Paring {
             int tulpi=rsm.getColumnCount();
             rs.last();
             int ridu=rs.getRow();
+            if(ridu>0){
             this.resSet=new Object[ridu][tulpi];
             if(rs.first())
             { //keri algusesse tagasi
@@ -91,7 +100,7 @@ public class Paring {
                 } //objetimassiivi täitmine
             } //if rs.first 
             
-                   
+            }   //if ridu >0       
             
         } catch (SQLException ex) {
            System.out.println(ex.getMessage()); 
