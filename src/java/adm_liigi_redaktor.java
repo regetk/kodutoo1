@@ -164,9 +164,9 @@ public class adm_liigi_redaktor extends HttpServlet {
         
     } 
 
-    //meetod andmete õigsuse kontrolliks ja teated, kui miskit on valesti
+    //meetod andmete ï¿½igsuse kontrolliks ja teated, kui miskit on valesti
     private List<String> getValidationErrors(HttpServletRequest request) {
-        List<String> errors = new ArrayList<>();
+        List<String> errors = new ArrayList<String>();
         if ("".equals(request.getParameter("ay_liik_kood"))) {
             errors.add("Sisesta alluvusyksuse liigi kood!");
         }

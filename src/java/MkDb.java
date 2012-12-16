@@ -20,13 +20,15 @@ import org.apache.commons.dbutils.DbUtils;
  * @author reget.kalamees
  */
 public class MkDb extends HttpServlet {
-    
+  private int viga=0;  
     @Override
     public void init(){
     try{
     Class.forName("org.hsqldb.jdbcDriver");
    } catch (ClassNotFoundException e){
-    throw new RuntimeException(e);
+       System.out.println(e.getMessage());
+       viga=1;
+    //throw new RuntimeException(e);
    }
     }
 
@@ -51,7 +53,7 @@ public class MkDb extends HttpServlet {
             if(request.getParameter("add")!=null){
                 serr=addData();
             }
-            /* TODO output your page here. You may use following sample code. */
+             //TODO output your page here. You may use following sample code. 
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet MkDb</title>");            
@@ -61,6 +63,7 @@ public class MkDb extends HttpServlet {
             out.println("<h1>Baas " + serr + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            
         } finally {            
             out.close();
         }
@@ -179,7 +182,8 @@ public class MkDb extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        processRequest(request, response);
+       // request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**
