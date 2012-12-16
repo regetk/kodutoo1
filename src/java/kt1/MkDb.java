@@ -62,14 +62,7 @@ public class MkDb extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet MkDb at " + request.getContextPath() + "</h1>");
             out.println("<h1>Baas " + serr + "</h1>");
-             out.println("<form method=\"GET\">");
-            out.println("<input type=\"hidden\"  name=\"mkdb\"><br /> ");
-            out.println("<input type=\"submit\" value=\"Tee baas\">");
-            out.println("</form >");
-            out.println("<form method=\"GET\">");
-            out.println("<input type=\"hidden\" name=\"add\"><br />");
-            out.println("<input type=\"submit\" value=\"Sisesta testandmed\">");
-            out.println("</form >");
+            out.println("<a href=index.jsp>Tagasi avalehele</a>");
             out.println("</body>");
             out.println("</html>");
             
