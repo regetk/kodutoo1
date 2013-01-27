@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>Hello</servlet-name>
+        <servlet-class>Hello</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MkDb</servlet-name>
+        <servlet-class>kt1.MkDb</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>admin_alluvusraport</servlet-name>
+        <servlet-class>kt1.admin_alluvusraport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adm_liigi_redaktor</servlet-name>
+        <servlet-class>kt1.adm_liigi_redaktor</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Hello</servlet-name>
+        <url-pattern>/Hello</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MkDb</servlet-name>
+        <url-pattern>/MkDb</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>admin_alluvusraport</servlet-name>
+        <url-pattern>/admin_alluvusraport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adm_liigi_redaktor</servlet-name>
+        <url-pattern>/adm_liigi_redaktor</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
